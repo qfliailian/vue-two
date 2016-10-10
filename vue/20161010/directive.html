@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			{{name}}
+			<div v-onn:click="Wfw()">
+				{{bool}}
+			</div>
+			<button @click="bool=!bool">Ok</button>
+		</div>
+		<div id="demo2">
+			<div v-onn>
+				mydir2
+			</div>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		/*Vue.directive('hide',function(value){
+			//vm就是相当于demo的作用域
+			//console.log(this)
+			//console.log(this.vm.$data.name)
+			//console.log(this.vm.age)
+			//相当于elm
+			//console.log(this.el)
+			//console.log(document.querySelector('#mydir'))
+			//document.querySelector('#mydir').style.color = 'blue'
+			//this.el.style.color = 'blue'
+			console.log(value)
+			if(value){
+				this.el.style.display = 'block'
+			}else{
+				this.el.style.display = 'none'
+			}
+		})*/
+		Vue.directive('onn',{
+			//一般接受事件的
+			bind:function(){
+				// console.log(this);
+				// console.log(this.vm);
+				var self = this;
+				//elm.bind
+				this.el.addEventListener(this.arg,function(){
+					//alert("执行")
+					//this.vm
+					var func = self.expression.substring(0,self.expression.length-2);
+					console.log(func);
+					self.vm[func]();
+				})
+			}
+			//update一般情况下它是接受data
+			/*update:function(value){
+				console.log(value)
+			}*/
+		})
+		var demo = new Vue({
+			el:'#demo',
+			data:{
+				name:'wsscat',
+				age:123,
+				bool:true
+			},
+			methods:{
+				Click:function(){
+					alert('1')
+				},
+				Wfw:function(){
+					alert('2')
+				}
+			}
+		})
+		var demo2 = new Vue({
+			el:'#demo2',
+			data:{
+				name:'safdasf',
+				age:321
+			}
+		})
+	</script>
+</html>

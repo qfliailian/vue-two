@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>directive</title>
+</head>
+<body >
+	<div id="demo">
+		<div id="mydir" v-mydir>my directive</div>
+	</div>
+	<div id="demo2">
+		<div id="mydir2" v-mydir2>my directive</div>
+	</div>
+</body>
+<script src="vue.js"></script>
+<script>
+	// directive指令,directive里面的vm和下面demo相等
+	Vue.directive('mydir',function(){
+		console.log(this.vm.$data.name);
+		console.log(this.vm.name)
+		// 相当elm,this.el
+		// document.querySelector('#mydir')
+		
+	})
+	Vue.directive('mydir2',function() {
+		bind:function() {
+			this.el.addEventListener('click',function(){
+
+			})
+		}
+	})
+	var demo = new Vue({
+		el:'#demo',
+		data:{
+			name:'ggithub',
+		}
+	})
+	var demo2 = new Vue({
+		el:'#demo2',
+		data:{
+			name:'demo2',
+		}
+	})
+</script>
+</html>

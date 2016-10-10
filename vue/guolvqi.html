@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器</title>
+</head>
+<body id='demo'>
+	<!-- vue过滤器也是在这个表达式{{}}里面用管道符号加上这个过滤器的名字 -->
+	<!-- <p style="color: red">lowercase</p>
+	<p>{{name|lowsercase}}</p> -->
+	<p style="color: red">uppercase</p>
+	<p>{{name|uppercase}}</p>
+	<p style="color: red">currency货币</p>
+	<p>{{num|currency '@'}}</p>
+	<p style="color: red">pluralize单词后面加s</p>
+	<p>{{num|pluralize 'item'}}{{name|pluralize name}}</p>
+	<p style="color: red">json将对象转换为json格式</p>
+	<p>{{json|json}}</p>
+	<p style="color: red">filterBy筛选数组的结果</p>
+	<ul>
+		<li v-for="arr in arrs|filterBy 'd' in arrs">{{arr}}</li>
+	</ul>
+</body>
+<script src="vue.js"></script>
+<script>
+	new Vue({
+		el:'#demo',
+		data:{
+			name:'ggithub',
+			num:100,
+			json:{
+				name:'ggithub',
+				age:1
+			},
+			arrs:['a','b','c','dd']
+		},
+		methods:{
+
+		}
+	})
+</script>
+</html>

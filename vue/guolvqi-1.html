@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器</title>
+</head>
+<body id="demo">
+	<span v-text='message | reverse'></span>
+	<span v-text='message | filter1'></span>
+	<span v-text='message | wrap "begin" "end"'></span>
+	<input v-model='input'>
+	<span>{{msg | concat input}}</span>
+</body>
+<script src="vue.js"></script>
+<script>
+	// 公共过滤器写在前面
+	Vue.filter('reverse', function(value){
+		return value.split('').reverse().join('')
+	})
+	Vue.filter('wrap', function(value, begin, end){
+		return begin + value + end
+	})
+	Vue.filter('concat', function(value, input) {
+		//input = undefined?'':input;
+		return value + input
+	})
+	Vue.filter('currencyDisplay',{
+		read:function(val) {
+			return '$'+val.toFixed(2)
+		},
+		write:function(val, oldVal) {
+			var number =+ val.replace(/[^\d.]/g,'');
+			return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
+		}
+	})
+	
+ 	var vue = new Vue({
+ 		el:'#demo',
+ 		data:{
+ 			message:'abcefj',
+ 			msg:'这是：'
+ 		},
+ 		// 私有过滤器
+ 		filters:{
+ 			filter1:function(value){
+ 				return '过滤器:'+value;
+ 			}
+ 		}
+ 	})
+ 	
+	
+</script>
+</html>
